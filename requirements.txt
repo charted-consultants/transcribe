@@ -1,0 +1,7 @@
+pyaudio
+numpy
+pandas
+soundfile
+pyperclip
+pynput
+faster-whisper

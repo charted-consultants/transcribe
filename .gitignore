@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Logs
+*.log
+transcription/logs/*.log
+transcription/data/transcriptions/*.log
+
+# Data files (keep structure, ignore content)
+transcription/data/*.csv
+transcription/data/transcriptions/*.csv
+transcription/data/transcriptions/*.wav
+
+# Media files
+media/*.mp3
+media/*.mp4
+media/*.wav
+media/*.m4a
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+.cache/
