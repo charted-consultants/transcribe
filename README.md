@@ -39,16 +39,40 @@ macOS menu bar application for live transcription with real-time preview.
 
 **Launch methods:**
 ```bash
-~/transcribe-menubar.sh              # Quick terminal launch
+~/transcribe-menubar.sh              # Quick terminal launch (requires symlink setup)
+./transcribe-menubar.sh              # Launch from repo directory
 ~/Transcribe Menubar.app             # Double-click application
 ./menubar/run_menubar.sh             # Direct script launch
 ```
 
 **Setup:**
+
+*macOS:*
 ```bash
+# Install dependencies
 cd menubar
-./install_menubar.sh                 # Install dependencies
-./enable_autostart.sh                # Enable auto-start on login
+./install_menubar.sh
+
+# Create launcher symlink for easy access from anywhere
+ln -sf "$(pwd)/../transcribe-menubar.sh" ~/transcribe-menubar.sh
+
+# Optional: Enable auto-start on login
+./enable_autostart.sh
+```
+
+*Windows:*
+```powershell
+# Install dependencies
+cd menubar
+pip install -r requirements.txt
+
+# Create launcher shortcut (run as Administrator)
+# Option 1: Create symlink
+mklink "%USERPROFILE%\transcribe-menubar.bat" "%CD%\..\transcribe-menubar.sh"
+
+# Option 2: Add repo directory to PATH
+# Go to System Properties > Environment Variables > User Variables > Path
+# Add: C:\path\to\transcribe-app
 ```
 
 ### TRANSCRIPTION
@@ -80,21 +104,39 @@ Storage for audio and video files used in transcription and processing.
 
 ### Prerequisites
 - Python 3.13 or higher
-- macOS (for menu bar app)
-- Virtual environment (included)
+- macOS or Windows (menu bar app optimized for macOS)
+- Virtual environment (recommended)
 
 ### Quick start
+
+*macOS:*
 ```bash
 # Clone the repository
-git clone git@github.com:dakthi/transcribe.git factory-ops
+git clone git@github-dakthi:dakthi/transcribe.git factory-ops
 cd factory-ops
 
-# Install menubar app
+# Install menubar app and create launcher
 cd menubar
 ./install_menubar.sh
+ln -sf "$(pwd)/../transcribe-menubar.sh" ~/transcribe-menubar.sh
 
 # Launch the app
 ~/transcribe-menubar.sh
+```
+
+*Windows:*
+```powershell
+# Clone the repository
+git clone git@github-dakthi:dakthi/transcribe.git factory-ops
+cd factory-ops
+
+# Install dependencies
+cd menubar
+pip install -r requirements.txt
+
+# Launch the app
+python ..\transcribe-menubar.sh
+# Or add the repo to PATH and run from anywhere
 ```
 
 ### Virtual environment
@@ -134,6 +176,7 @@ Your workflow is different from everyone else's. That's not a problem to solve, 
 
 ```
 factory-ops/
+├── transcribe-menubar.sh    # Quick launcher script (symlink to ~/)
 ├── venv/                    # Centralized Python environment
 ├── menubar/                 # Menu bar application
 │   ├── menubar_transcribe.py
@@ -146,6 +189,9 @@ factory-ops/
 │   └── *.py                # Transcription scripts
 ├── media/                   # Audio/video storage
 ├── utils/                   # Utility scripts
+│   ├── batch-transcribe-mp4-videos.py
+│   ├── batch-transcribe-videos.py
+│   └── ...
 └── README.md               # This file
 ```
 
