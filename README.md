@@ -1,30 +1,17 @@
-# FACTORY-OPS
+# Transcribe App
 
-```
-  _____ _    ____ _____ ___  ______   __      ___  ____  ____
- |  ___/ \  / ___|_   _/ _ \|  _ \ \ / /___  / _ \|  _ \/ ___|
- | |_ / _ \| |     | || | | | |_) \ V /____|| | | | |_) \___ \
- |  _/ ___ \ |___  | || |_| |  _ < | |      | |_| |  __/ ___) |
- |_|/_/   \_\____| |_| \___/|_| \_\|_|       \___/|_|   |____/
+macOS/Windows application for live audio transcription with batch processing utilities.
 
-    Operational back-office tools for the modern AI factory
-```
+## Features
 
-## ABOUT
+- **Live transcription** - Real-time audio transcription via API
+- **Menu bar app** - Quick access from macOS menu bar
+- **Clipboard integration** - Auto-copy transcriptions with memory
+- **Batch processing** - Transcribe multiple videos/audio files at once
+- **Media utilities** - YouTube download, format conversion, silence removal
+- **Keyboard shortcuts** - Quick control and clipboard management
 
-This is not a framework. This is not a wrapper. This is a collection of operational tools built exactly how one person works.
-
-In the new era of AI-powered development, you don't have to compromise. You don't have to adapt to someone else's wrapper or framework. You can build tools that fit your workflow precisely.
-
-These are base tools. Pull them, fork them, tell your Claude or Cursor or Aider to modify them to work exactly how YOU work. Your workflow is unique. Your tools should be too.
-
-## PHILOSOPHY
-
-The age of one-size-fits-all tools is over. With AI coding assistants, highly personalized workflows and tools are not just possible but preferable. You can have exactly what you need, built exactly how you need it.
-
-This repository demonstrates that philosophy. It started as a simple transcription script. It evolved into a full operational toolkit through conversation with AI, adapting to real needs as they emerged.
-
-## WHAT'S INSIDE
+## Components
 
 ### MENUBAR
 macOS menu bar application for live transcription with real-time preview.
@@ -112,8 +99,8 @@ Storage for audio and video files used in transcription and processing.
 *macOS:*
 ```bash
 # Clone the repository
-git clone git@github-dakthi:dakthi/transcribe.git factory-ops
-cd factory-ops
+git clone git@github-dakthi:dakthi/transcribe.git transcribe-app
+cd transcribe-app
 
 # Install menubar app and create launcher
 cd menubar
@@ -127,8 +114,8 @@ ln -sf "$(pwd)/../transcribe-menubar.sh" ~/transcribe-menubar.sh
 *Windows:*
 ```powershell
 # Clone the repository
-git clone git@github-dakthi:dakthi/transcribe.git factory-ops
-cd factory-ops
+git clone git@github-dakthi:dakthi/transcribe.git transcribe-app
+cd transcribe-app
 
 # Install dependencies
 cd menubar
@@ -161,21 +148,10 @@ RATE = 16000              # Sample rate
 CHANNELS = 1              # Mono audio
 ```
 
-## USAGE RECOMMENDATIONS
-
-**For best results:**
-
-1. PULL this repository
-2. TELL your AI coding assistant (Claude, Cursor, Aider, etc.) to integrate it into YOUR workflow
-3. MODIFY the tools to match how YOU work
-4. DON'T compromise for generic wrappers when you can have exactly what you need
-
-Your workflow is different from everyone else's. That's not a problem to solve, it's a feature to embrace.
-
 ## STRUCTURE
 
 ```
-factory-ops/
+transcribe-app/
 ├── transcribe-menubar.sh    # Quick launcher script (symlink to ~/)
 ├── venv/                    # Centralized Python environment
 ├── menubar/                 # Menu bar application
@@ -210,7 +186,7 @@ factory-ops/
 
 ## EXTENDING
 
-These tools are meant to be extended and personalized. Some ideas:
+Extension ideas:
 
 - Add different transcription providers
 - Integrate with your note-taking system
@@ -219,8 +195,6 @@ These tools are meant to be extended and personalized. Some ideas:
 - Connect to your task management workflow
 - Add language translation
 - Implement custom audio filters
-
-Don't ask permission. Just build what you need.
 
 ## REQUIREMENTS
 
@@ -236,10 +210,8 @@ Main dependencies:
 
 ## LICENSE
 
-Use it however you want. Modify it to fit your needs. Share your modifications if you want. Or don't. It's your workflow.
+MIT License - Use freely, modify as needed.
 
 ## CREDITS
 
-Built through iterative conversation between a human and Claude, demonstrating how AI coding assistants enable truly personalized tool development.
-
-This is what's possible when you stop compromising.
+Built with Claude Code.
