@@ -22,7 +22,7 @@ This guide will help you set up the live transcription tool as a macOS menu bar 
 Run the automated installation script:
 
 ```bash
-cd /Users/dakthi/Documents/Factory-Tech/transcribe-main
+cd /Users/dakthi/Documents/Factory-Tech/tools/transcribe-app/menubar
 ./install_menubar.sh
 ```
 
@@ -106,7 +106,7 @@ Create a file at `~/Library/LaunchAgents/com.transcribe.menubar.plist`:
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/dakthi/Documents/Factory-Tech/transcribe-main/run_menubar.sh</string>
+        <string>/Users/dakthi/Documents/Factory-Tech/tools/transcribe-app/menubar/run_menubar.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>

@@ -107,7 +107,7 @@ The menubar app uses an external transcription API. Configure in `menubar/menuba
 
 ```python
 API_BASE_URL = "https://transcribe.chartedconsultants.com"
-API_MODEL = "turbo"
+API_MODEL = "turbo"  # The transcription model to use
 ```
 
 ### Audio settings

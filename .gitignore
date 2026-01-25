@@ -21,6 +21,7 @@ transcription/logs/*.log
 transcription/data/transcriptions/*.log
 
 # Data files (keep structure, ignore content)
+*.csv
 transcription/data/*.csv
 transcription/data/transcriptions/*.csv
 transcription/data/transcriptions/*.wav

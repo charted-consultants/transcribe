@@ -5,3 +5,6 @@ soundfile
 pyperclip
 pynput
 faster-whisper
+rumps
+requests
+yt-dlp

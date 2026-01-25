@@ -13,29 +13,30 @@ fi
 echo "✅ Python 3 found: $(python3 --version)"
 echo ""
 
-# Get the root directory (parent of menubar folder)
+# Use centralized Factory-Tech virtual environment
+FACTORY_TECH_DIR="/Users/dakthi/Documents/Factory-Tech"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ROOT_DIR="$( cd "$DIR/.." && pwd )"
+TRANSCRIBE_APP_DIR="$( cd "$DIR/.." && pwd )"
 
-# Create virtual environment in root
-echo "📦 Creating virtual environment..."
-if [ -d "$ROOT_DIR/venv" ]; then
-    echo "⚠️  Virtual environment already exists, using existing one"
-else
-    cd "$ROOT_DIR"
-    python3 -m venv venv
-    echo "✅ Virtual environment created"
+# Check if centralized venv exists
+if [ ! -d "$FACTORY_TECH_DIR/.venv" ]; then
+    echo "❌ Centralized virtual environment not found at $FACTORY_TECH_DIR/.venv"
+    echo "Creating centralized venv..."
+    cd "$FACTORY_TECH_DIR"
+    python3 -m venv .venv
+    echo "✅ Centralized virtual environment created"
 fi
 
 echo ""
 
 # Activate virtual environment and install packages
-echo "📦 Installing dependencies in virtual environment..."
-source "$ROOT_DIR/venv/bin/activate"
+echo "📦 Installing dependencies from requirements.txt..."
+source "$FACTORY_TECH_DIR/.venv/bin/activate"
 
-# Install all required packages
+# Install from requirements.txt
+cd "$TRANSCRIBE_APP_DIR"
 pip install --upgrade pip
-pip install rumps pyaudio pandas pyperclip requests pynput
+pip install -r requirements.txt
 
 if [ $? -eq 0 ]; then
     echo "✅ All packages installed successfully"

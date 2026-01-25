@@ -7,15 +7,15 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/dakthi/Documents/Factory-Tech/factory-ops/menubar/run_menubar.sh</string>
+        <string>/Users/dakthi/Documents/Factory-Tech/tools/transcribe-app/menubar/run_menubar.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <false/>
     <key>StandardOutPath</key>
-    <string>/Users/dakthi/Documents/Factory-Tech/factory-ops/transcription/logs/menubar_stdout.log</string>
+    <string>/Users/dakthi/Documents/Factory-Tech/tools/transcribe-app/transcription/logs/menubar_stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/dakthi/Documents/Factory-Tech/factory-ops/transcription/logs/menubar_stderr.log</string>
+    <string>/Users/dakthi/Documents/Factory-Tech/tools/transcribe-app/transcription/logs/menubar_stderr.log</string>
 </dict>
 </plist>
