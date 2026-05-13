@@ -43,3 +43,4 @@ media/*.m4a
 *.tmp
 *.bak
 .cache/
+menubar/.env
