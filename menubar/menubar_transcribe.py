@@ -26,6 +26,7 @@ CSV_FILE = os.path.join(ROOT_DIR, "transcription", "data", "transcription.csv")
 # API Configuration
 API_BASE_URL = "https://transcribe.chartedconsultants.com"
 API_MODEL = "turbo"
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 RECORD_SECONDS = 5
 FORMAT = pyaudio.paInt16
@@ -99,12 +100,28 @@ def transcribe_chunk_via_api(audio_data):
                 return result.get('text') or result.get('transcription') or result.get('transcript') or str(result)
             return str(result)
         else:
-            logging.error(f"API returned status {response.status_code}: {response.text}")
-            return None
+            logging.warning(f"Primary API returned {response.status_code}, falling back to OpenAI Whisper")
 
     except Exception as e:
-        logging.error(f"API transcription error: {e}")
-        return None
+        logging.warning(f"Primary API unreachable, falling back to OpenAI Whisper: {e}")
+
+    # Fallback: OpenAI Whisper
+    try:
+        wav_buffer.seek(0)
+        fallback_response = requests.post(
+            "https://api.openai.com/v1/audio/transcriptions",
+            headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
+            files={"file": ("chunk.wav", wav_buffer, "audio/wav")},
+            data={"model": "whisper-1", "language": "en"},
+            timeout=30,
+        )
+        if fallback_response.status_code == 200:
+            return fallback_response.json().get("text")
+        logging.error(f"OpenAI Whisper fallback failed: {fallback_response.status_code}: {fallback_response.text}")
+    except Exception as e:
+        logging.error(f"OpenAI Whisper fallback error: {e}")
+
+    return None
 
 
 class TranscriptionApp(rumps.App):
