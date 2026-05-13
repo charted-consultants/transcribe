@@ -65,47 +65,43 @@ def save_wav_file(filename, frames):
 
 def transcribe_chunk_via_api(audio_data):
     """
-    Send audio chunk to the API for transcription
-    Returns the transcribed text or None on error
+    Send audio chunk to the API for transcription.
+    Returns the transcribed text or None on error.
     """
+    # Build WAV buffer once — reused by both primary and fallback
+    wav_buffer = io.BytesIO()
     try:
-        # Create WAV file in memory
-        wav_buffer = io.BytesIO()
         with wave.open(wav_buffer, 'wb') as wf:
             wf.setnchannels(CHANNELS)
             wf.setsampwidth(pyaudio.PyAudio().get_sample_size(FORMAT))
             wf.setframerate(RATE)
             wf.writeframes(audio_data)
+    except Exception as e:
+        logging.error(f"Failed to build WAV buffer: {e}")
+        return None
 
+    # Primary: chartedconsultants
+    try:
         wav_buffer.seek(0)
-
-        # Send to API
-        files = {
-            'file': ('chunk.wav', wav_buffer, 'audio/wav')
-        }
-        params = {
-            'model': API_MODEL
-        }
-
         response = requests.post(
             f"{API_BASE_URL}/transcribe",
-            files=files,
-            params=params,
-            timeout=30
+            files={'file': ('chunk.wav', wav_buffer, 'audio/wav')},
+            params={'model': API_MODEL},
+            timeout=30,
         )
-
         if response.status_code == 200:
             result = response.json()
             if isinstance(result, dict):
                 return result.get('text') or result.get('transcription') or result.get('transcript') or str(result)
             return str(result)
-        else:
-            logging.warning(f"Primary API returned {response.status_code}, falling back to OpenAI Whisper")
-
+        logging.warning(f"Primary API returned {response.status_code}, falling back to OpenAI Whisper")
     except Exception as e:
         logging.warning(f"Primary API unreachable, falling back to OpenAI Whisper: {e}")
 
     # Fallback: OpenAI Whisper
+    if not OPENAI_API_KEY:
+        logging.error("No OPENAI_API_KEY set, cannot fall back")
+        return None
     try:
         wav_buffer.seek(0)
         fallback_response = requests.post(
