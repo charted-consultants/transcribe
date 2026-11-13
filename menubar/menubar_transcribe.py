@@ -108,7 +108,7 @@ def transcribe_chunk_via_api(audio_data):
             "https://api.openai.com/v1/audio/transcriptions",
             headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
             files={"file": ("chunk.wav", wav_buffer, "audio/wav")},
-            data={"model": "whisper-1", "language": "en"},
+            data={"model": "whisper-1"},
             timeout=30,
         )
         if fallback_response.status_code == 200:
